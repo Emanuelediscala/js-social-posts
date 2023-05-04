@@ -62,15 +62,20 @@ posts.forEach(element => {
     let post = document.createElement("div")
     let postHeader = document.createElement("div")
     let metaImg = document.createElement("img")
-    let metaInfo = document.createElement("div")
-    let metaTime = documen.createElement("p")
+    let metaData = document.createElement("div")
+    let metaName = document.createElement("p")
+    let metaTime = document.createElement("p")
     let bodyText = document.createElement("p")
     let bodyImg = document.createElement("img")
     let footer = document.createElement ("div")
     let likeReaction = document.createElement("a")
     let ppleLikedthatpost = document.createElement("span")
     // inserisco valori alle variabili
-    metaImg.src += element.media;
-    metaInfo.innerText += element.author.name;
-    console.log(metaInfo);
+    metaImg.src += element.author.image;
+    metaName.innerText += element.author.name;
+    metaTime.innerText += "3 ore fa"
+    bodyText.innerText += element.content;
+    bodyImg.src += element.media;
+
+    
 });
