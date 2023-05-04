@@ -109,26 +109,19 @@ h1 {
     border-radius: 8px;    
     text-decoration: none;
     color: #404040;
-    
 }
 
-/* .like-button:not(.like-button--liked):hover {
-    
-}  */
+.like-button:hover {
+    background-color: #e3e3e3;
+    cursor: pointer;
+}  
 
 .like-button__label {
     font-weight: bold;
 }
 
 .like-button--liked {
-    color: #0CD977;
+    color: blue!important;
     cursor: default;
 }
-.bg-blue {
-    background-color: blue!important;
-    
-}
 
-a:hover {
-    cursor: pointer;
-}

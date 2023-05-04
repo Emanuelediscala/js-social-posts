@@ -82,34 +82,61 @@ posts.forEach((element) => {
     <div class="post__footer">
         <div class="likes js-likes">
             <div class="likes__cta">
-                <a class="like-button  js-like-button"  data-postid="1">
+                <a class="like-button  js-like-button"  data-postid="${element.id}">
                     <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                     <span class="like-button__label">Mi Piace</span>
                 </a>
             </div>
             <div class="likes__counter">
-                Piace a <b id="like-counter-1" class="js-likes-counter">${element.likes}</b> persone
+                Piace a <b id="${element.id}" class="js-likes-counter">${element.likes}</b> persone
             </div>
         </div> 
     </div>            
 </div>`
 });
 
-let Ids = []
+
+let currentLikes = []
 
 // vado a riempire l'array degli ID
 posts.forEach((element,index) => {
-    const id = element.id
-    Ids.push(id);
+    const Likes = element.likes;
+    currentLikes.push(Likes);
 });
-console.log(Ids);
+console.log(currentLikes);
 // DEFINISCO BUTTONS
 
-let likeIteration = document.querySelector(".likes__cta")
-    likeIteration.addEventListener("click", function() {
-        likeIteration.classList.toggle("bg-blue")
-        console.log(likeIteration);
-    })
+let likeIteration = document.querySelectorAll(".like-button")
+//    DEFINISCO CICLO FOR PER IL CLICK
+    for (let i = 0; i < likeIteration.length; i++) {
+        const element = likeIteration[i];
+        element.addEventListener("click", function(){
+            // PRENDO ELEMENTO HTML DELL'ID CON IL THIS
+            // FACCIO PARTIRE LA FUNZIONE DI INCREMENTO
+            if (element.classList.contains("like-button--liked")){
+                decrementoLike(i);
+                
+            }
+            else {
+                incrementoLike(i)
+            }
+            element.classList.toggle("like-button--liked")
+            document.querySelectorAll(".js-likes-counter")[i].innerHTML = posts[i].likes
+        })
+    }
+// DEFINISCO FUNZIONE INCREMENTO LIKE
+    function incrementoLike(indice) {
+        posts[indice].likes++;
+        console.log(posts[indice].likes);
+    } 
+
+    // currentLikes = newCurrentLikes
+
+// DEFINISCO FUNZIONE DECREMENTO LIKE
+function decrementoLike(indice) {
+    posts[indice].likes--;
+    console.log(posts[indice].likes);
+} 
 
 
 
@@ -117,40 +144,3 @@ let likeIteration = document.querySelector(".likes__cta")
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-;
-
-//     let post = document.createElement("div")
-//     let postHeader = document.createElement("div")
-//     let metaImg = document.createElement("img")
-//     let metaData = document.createElement("div")
-//     let metaName = document.createElement("p")
-//     let metaTime = document.createElement("p")
-//     let bodyText = document.createElement("p")
-//     let bodyImg = document.createElement("img")
-//     let footer = document.createElement ("div")
-//     let likeReaction = document.createElement("i")
-//     let ppleLikedthatpost = document.createElement("span")
-//     // inserisco valori alle variabili
-//     metaImg.src += element.author.image;
-//     metaName.innerText += element.author.name;
-//     metaTime.innerText += "3 ore fa"
-//     bodyText.innerText += element.content;
-//     bodyImg.src += element.media;
-//     likeReaction.classList.add("like-button__icon","fas","fa-thumbs-up")
-//     console.log(likeReaction);
-// ;
