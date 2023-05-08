@@ -57,17 +57,21 @@ const posts = [
 ];
 
 let container = document.getElementById("container")
+// DEFINISCO FUNZIONE CHE SOSTUISCE IMG CON DIV 
+
+
+
 
 // GENERO ELEMENTI SU UN CLICLO FOR
 // INIZIO A CREARE LE VARIABILI
 
-posts.forEach((element) => {
+posts.forEach((element,index) => {
     container.innerHTML += `
     <div class="post">
     <div class="post__header">
         <div class="post-meta">                    
             <div class="post-meta__icon">
-                <img class="profile-pic" src="${element.author.image}" alt="${element.author.name}">                    
+                ${renderImg(index)}
             </div>
             <div class="post-meta__data">
                 <div class="post-meta__author">${element.author.name}</div>
@@ -95,15 +99,6 @@ posts.forEach((element) => {
 </div>`
 });
 
-
-let currentLikes = []
-
-// vado a riempire l'array degli ID
-posts.forEach((element,index) => {
-    const Likes = element.likes;
-    currentLikes.push(Likes);
-});
-console.log(currentLikes);
 // DEFINISCO BUTTONS
 
 let likeIteration = document.querySelectorAll(".like-button")
@@ -111,15 +106,15 @@ let likeIteration = document.querySelectorAll(".like-button")
     for (let i = 0; i < likeIteration.length; i++) {
         const element = likeIteration[i];
         element.addEventListener("click", function(){
-            // PRENDO ELEMENTO HTML DELL'ID CON IL THIS
             // FACCIO PARTIRE LA FUNZIONE DI INCREMENTO
-            if (element.classList.contains("like-button--liked")){
-                decrementoLike(i);
-                
-            }
-            else {
-                incrementoLike(i)
-            }
+            // if (element.classList.contains("like-button--liked")){
+            //     decrementoLike(i);
+            // }
+            // else {
+            //     incrementoLike(i)
+            // }
+            // OPERATORE TERNARIO
+            element.classList.contains("like-button--liked") ? decrementoLike(i) : incrementoLike(i);    
             element.classList.toggle("like-button--liked")
             document.querySelectorAll(".js-likes-counter")[i].innerHTML = posts[i].likes
         })
@@ -130,14 +125,23 @@ let likeIteration = document.querySelectorAll(".like-button")
         console.log(posts[indice].likes);
     } 
 
-    // currentLikes = newCurrentLikes
-
 // DEFINISCO FUNZIONE DECREMENTO LIKE
 function decrementoLike(indice) {
     posts[indice].likes--;
     console.log(posts[indice].likes);
 } 
 
+
+// DEFINISCO FUNZIONE PER CONTROLLO AVATAR
+function renderImg(i) {
+        const element = posts[i];
+        if (element.author.image === null) { 
+            let x =`<span class="profile-pic-default">LF</span>`
+            return x            
+        }
+        let y = `<img class="profile-pic" src="${element.author.image}" alt="${element.author.name}">`
+        return y 
+    }
 
 
 
